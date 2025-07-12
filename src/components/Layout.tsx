@@ -35,7 +35,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageCha
               <h1 className="text-xl font-bold">{t('appName')}</h1>
             </div>
             
-            <div className="flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-4">
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
@@ -73,6 +73,9 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageCha
                 </button>
               )}
             </div>
+            <div className="md:hidden flex items-center">
+              {/* Mobile Menu Button */}
+            </div>
           </div>
         </div>
       </header>
@@ -81,21 +84,21 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageCha
       {user && (
         <nav className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex space-x-8 overflow-x-auto">
+            <div className="flex space-x-4 sm:space-x-8 overflow-x-auto">
               {navItems.map((item) => {
                 const Icon = item.icon;
                 return (
                   <button
                     key={item.id}
                     onClick={() => onPageChange(item.id)}
-                    className={`flex items-center space-x-2 py-4 px-2 border-b-2 whitespace-nowrap transition-colors ${
+                    className={`flex items-center space-x-2 py-4 px-1 sm:px-2 border-b-2 whitespace-nowrap transition-colors ${
                       currentPage === item.id
                         ? 'border-red-500 text-red-600 dark:text-red-400'
                         : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
                     }`}
                   >
                     <Icon className="h-4 w-4" />
-                    <span>{item.label}</span>
+                    <span className="text-sm sm:text-base">{item.label}</span>
                   </button>
                 );
               })}
